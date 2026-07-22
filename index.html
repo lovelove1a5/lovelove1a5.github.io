@@ -3,67 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Live Timer</title>
-
 <style>
 body{
-margin:0;
-background:transparent;
-overflow:hidden;
-font-family:Arial,sans-serif;
+    margin:0;
+    background:transparent;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
 }
-
 .box{
-display:inline-block;
-background:#000;
-border:2px solid #555;
-padding:10px 20px;
-text-align:center;
+    display:inline-block;
+    background:#000;
+    border:2px solid #555;
+    padding:8px 15px;
+    text-align:center;
 }
-
 .title{
-color:white;
-font-size:22px;
-font-weight:bold;
+    color:#fff;
+    font-size:22px;
+    font-weight:bold;
 }
-
 #timer{
-color:red;
-font-size:42px;
-font-weight:bold;
+    color:#ff1a1a;
+    font-size:42px;
+    font-weight:bold;
 }
 </style>
-
 </head>
-
 <body>
-
 <div class="box">
-<div class="title">STREAM TRWA:</div>
-<div id="timer">00:00:00</div>
+    <div class="title">STREAM TRWA:</div>
+    <div id="timer">00:00:00</div>
 </div>
 
 <script>
-
 const start = Date.now();
 
 function update(){
+    const diff = Math.floor((Date.now()-start)/1000);
 
-let diff=Math.floor((Date.now()-start)/1000);
+    const h = String(Math.floor(diff/3600)).padStart(2,"0");
+    const m = String(Math.floor((diff%3600)/60)).padStart(2,"0");
+    const s = String(diff%60).padStart(2,"0");
 
-let h=Math.floor(diff/3600);
-let m=Math.floor((diff%3600)/60);
-let s=diff%60;
-
-document.getElementById("timer").innerHTML=
-String(h).padStart(2,"0")+":"+
-String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
-
+    document.getElementById("timer").textContent =
+        `${h}:${m}:${s}`;
 }
 
 setInterval(update,1000);
-
+update();
 </script>
-
 </body>
 </html>
